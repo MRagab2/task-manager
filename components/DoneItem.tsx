@@ -2,7 +2,7 @@ import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
-const TodoItem = ({
+const DoneItem = ({
   title, description, check,
 }: TaskItem) => {
 
@@ -12,8 +12,7 @@ const TodoItem = ({
       <View className=" 
       flex
       flex-row 
-      m-1
-      
+      m-2
       border-white 
       border-solid 
       border-b 
@@ -49,4 +48,4 @@ const TodoItem = ({
   );
 };
 
-export default TodoItem;
+export default DoneItem;

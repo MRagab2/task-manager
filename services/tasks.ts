@@ -1,4 +1,4 @@
-import { Client, Databases } from "react-native-appwrite";
+import { Client, Databases, Query } from "react-native-appwrite";
 
 const ENDPOINT = process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!;
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
@@ -16,30 +16,30 @@ export const getUncheckedTasks = async (): Promise<TaskItem[] | undefined> => {
         const result = await databases.listDocuments({
             databaseId: DATABASE_ID,
             collectionId: COLLECTION_ID,
-            // queries: []
+            queries: [
+                Query.equal('check',false)    
+            ]
         });
 
-        // console.log(result + "aaaaaaaaa");
         return result.documents || [];
     } catch (error) {
         console.error(error);
         return undefined;
     }
 }
+export const getCheckedTasks = async (): Promise<TaskItem[] | undefined> => {
+    try {
+        const result = await databases.listDocuments({
+            databaseId: DATABASE_ID,
+            collectionId: COLLECTION_ID,
+            queries: [
+                Query.equal('check',true)    
+            ]
+        });
 
-// export const addTask = async (taskItem: TaskItem) => {
-//     try {
-//         await database.createDocument(
-//             DATABASE_ID,
-//             TABLE_ID,
-//             ID.unique(),
-//             {
-//                 title: taskItem.title ? taskItem.title : '',
-//                 description: taskItem.description ? taskItem.description : '',
-//                 check: false
-//             })
-//     } catch (error) {
-//         console.log(error);
-//         throw error;
-//     }
-// }
+        return result.documents || [];
+    } catch (error) {
+        console.error(error);
+        return undefined;
+    }
+}
