@@ -1,5 +1,5 @@
 import { icons } from "@/constants/icons";
-import { deleteTask, updateTask } from "@/services/tasks";
+import { deleteTask, updateTask } from "@/services/tasksAPIs";
 import Checkbox from "expo-checkbox";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -54,7 +54,7 @@ const DoneItem = ({
             </View>
 
             <View>
-              <Text className="text-caveat text-light-300 text-2xl my-1 mb-3 font-caveat">
+              <Text className="text-caveat text-light-100 text-2xl my-1 mb-3 font-caveat">
                 {description}
               </Text>
             </View>

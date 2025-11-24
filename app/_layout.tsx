@@ -6,7 +6,7 @@ import './global.css';
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
-    // use the imported font assets from `constants/fonts`
+
     'Caveat': fonts.Caveat,
     'Dancing Script': fonts.DancingScript,
   });

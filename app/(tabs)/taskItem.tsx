@@ -1,17 +1,19 @@
 import { icons } from '@/constants/icons';
-import { createTask, getTaskById, updateTask } from '@/services/tasks';
+import { createTask, getTaskById, updateTask } from '@/services/tasksAPIs';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const TaskItem = () => {
+  const { taskIdParams } = useLocalSearchParams();
+
   const [taskId, setTaskId] = useState(0);
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
+
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState<Error | null>(null);
 
-  const { taskIdParams } = useLocalSearchParams();
   const router = useRouter();
 
   useEffect(() => {
@@ -20,12 +22,12 @@ const TaskItem = () => {
         setLoading(true);
         setError(null);
 
-        if (taskIdParams && taskIdParams != 0) {
+        if (taskIdParams != 0) {
           setTaskId(taskIdParams)
           const taskItem = await getTaskById(taskId);
 
-          setTaskTitle(taskItem?.title || '-');
-          setTaskDescription(taskItem?.description || '-');
+          setTaskTitle(taskItem?.title || '');
+          setTaskDescription(taskItem?.description || '');
         }
       };
 
@@ -135,7 +137,6 @@ const TaskItem = () => {
               </View>
             </View>
 
-
             {/* Description  */}
             <View className='mb-5'>
 
@@ -159,10 +160,8 @@ const TaskItem = () => {
           </View>
         )}
       </ScrollView>
-
     </View>
   );
 };
 
 export default TaskItem;
-const styles = StyleSheet.create({});

@@ -1,7 +1,7 @@
 import DoneItem from "@/components/DoneItem";
 import TodoItem from "@/components/TodoItem";
 import { icons } from "@/constants/icons";
-import { getCheckedTasks, getUncheckedTasks } from "@/services/tasks";
+import { getCheckedTasks, getUncheckedTasks } from "@/services/tasksAPIs";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -11,50 +11,33 @@ export default function Index() {
   const [checkedTasks, setCheckedTasks] = useState([])
   const [uncheckedTasks, setUncheckedTasks] = useState([])
 
-  const [uncheckedTasksLoading, setUncheckedTasksLoading] = useState(false);
-  const [checkedTasksLoading, setCheckedTasksLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [err, setError] = useState<Error | null>(null);
 
   const router = useRouter();
 
   useEffect(() => {
     try {
-      setUncheckedTasksLoading(true);
-      setCheckedTasksLoading(true);
+      setLoading(true);
 
-      const fetchUnCheckedTask = async () => {
-        const result = await getUncheckedTasks();
-        setUncheckedTasks(result);
-      };
-      const fetchCheckedTask = async () => {
-        const result = await getCheckedTasks();
-        setCheckedTasks(result);
+      const fetchTasks = async () => {
+        const tempUncheckedTasks = await getUncheckedTasks();
+        const tempCheckedTasks = await getCheckedTasks();
+
+        setUncheckedTasks(tempUncheckedTasks);
+        setCheckedTasks(tempCheckedTasks);
       };
 
-      fetchUnCheckedTask();
-      fetchCheckedTask();
+      fetchTasks();
     } catch (err) {
       setError(
         err instanceof Error ? err : new Error("An error occurred")
       );
     } finally {
-      setUncheckedTasksLoading(false);
-      setCheckedTasksLoading(false);
+      setLoading(false);
     }
 
   }, []);
-
-  // const {
-  //   data: uncheckedTaskItems,
-  //   error: uncheckedTaskItemsError,
-  //   loading: uncheckedTaskItemsLoading,
-  // } = useFetch(getUncheckedTasks);
-
-  // const {
-  //   data: checkedTaskItems,
-  //   error: checkedTaskItemsError,
-  //   loading: checkedTaskItemsLoading,
-  // } = useFetch(getCheckedTasks);
 
   return (
     <View className="bg-primary flex-1">
@@ -81,7 +64,7 @@ export default function Index() {
         }}
       >
 
-        {uncheckedTasksLoading || checkedTasksLoading ? (
+        {loading ? (
           <ActivityIndicator
             size='large'
             color='#0000ff'
@@ -116,7 +99,7 @@ export default function Index() {
               renderItem={({ item }) => (
                 <TodoItem {...item} />
               )}
-              keyExtractor={(item) => item.$id.toString()}
+              keyExtractor={(item) => item.$id}
               numColumns={1}
               className="mb-5"
               scrollEnabled={false}
@@ -136,7 +119,7 @@ export default function Index() {
               renderItem={({ item }) => (
                 <DoneItem {...item} />
               )}
-              keyExtractor={(item) => item.$id.toString()}
+              keyExtractor={(item) => item.$id}
               numColumns={1}
               scrollEnabled={false}
               nestedScrollEnabled={false}
@@ -150,4 +133,4 @@ export default function Index() {
 
     </View>
   );
-}
+};

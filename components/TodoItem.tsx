@@ -1,5 +1,5 @@
 import { icons } from "@/constants/icons";
-import { deleteTask, updateTask } from "@/services/tasks";
+import { deleteTask, updateTask } from "@/services/tasksAPIs";
 import Checkbox from "expo-checkbox";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -43,7 +43,6 @@ const TodoItem = ({
               }}
             />
           </TouchableOpacity>
-
         </View>
 
         <View className=" flex-col w-[80%] items-left justify-start h-full">
@@ -61,9 +60,7 @@ const TodoItem = ({
               </Text>
             </View>
           </TouchableOpacity>
-
         </View>
-
       </View>
     </View>
   );

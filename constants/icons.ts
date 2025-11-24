@@ -1,8 +1,8 @@
-import addNew from "@/assets/icons/add.png";
-import back from "@/assets/icons/arrow.png";
-import logo from "@/assets/icons/check-mark.png";
-import save from "@/assets/icons/checked.png";
-import del from "@/assets/icons/letter-x.png";
+import addNew from "@/assets/icons/addNew.png";
+import back from "@/assets/icons/back.png";
+import del from "@/assets/icons/del.png";
+import logo from "@/assets/icons/logo.png";
+import save from "@/assets/icons/save.png";
 
 export const icons = {
     logo,
