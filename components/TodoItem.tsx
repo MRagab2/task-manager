@@ -22,8 +22,8 @@ const TodoItem = ({
             }}
             value={isChecked}
             onValueChange={async () => {
-              setChecked;
-              updateTask({ $id,check: true });
+              setChecked(true);
+              await updateTask({ $id, check: true })
               router.push('/');
             }}
             color={isChecked ? '#4630EB' : undefined}
@@ -47,7 +47,7 @@ const TodoItem = ({
         </View>
 
         <View className=" flex-col w-[80%] items-left justify-start h-full">
-          <TouchableOpacity onPress={()=> router.push(`/taskItem?taskId=${$id?$id:null }`)}>
+          <TouchableOpacity onPress={() => router.push(`/taskItem?taskIdParams=${$id}`)}>
 
             <View className="justify-start">
               <Text className="text-caveat text-white text-4xl font-caveat">

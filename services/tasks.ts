@@ -17,7 +17,8 @@ export const getUncheckedTasks = async (): Promise<TaskItem[] | undefined> => {
             databaseId: DATABASE_ID,
             collectionId: COLLECTION_ID,
             queries: [
-                Query.equal('check', false)
+                Query.equal('check', false),
+                Query.orderAsc('$updatedAt')
             ]
         });
 
@@ -77,12 +78,14 @@ export const updateTask = async (taskItem: TaskItem) => {
 
 export const getTaskById = async (taskId: number) => {
     try {
+        
         const result = await databases.getDocument({
             databaseId: DATABASE_ID,
             collectionId: COLLECTION_ID,
             documentId: taskId,
         });
 
+        
         return result;
     } catch (error) {
         console.error(error);

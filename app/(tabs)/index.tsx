@@ -54,7 +54,7 @@ export default function Index() {
             <Text className="font-dancing-script text-5xl text-secondary">
               To-Do :
             </Text>
-            <TouchableOpacity onPress={() => router.push(`/taskItem?taskId=${0}`)} className="self-center mr-6">
+            <TouchableOpacity onPress={() => router.push(`/taskItem?taskIdParams=${0}`)} className="self-center mr-6">
               <Image
                 source={icons.addNew}
                 style={{
@@ -97,6 +97,9 @@ export default function Index() {
             numColumns={1}
             scrollEnabled={false}
             nestedScrollEnabled={false}
+            style={{
+              marginBottom:100
+            }}
           />
         </View>
       </ScrollView>
