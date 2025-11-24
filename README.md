@@ -61,6 +61,8 @@ The application is built upon a modern stack of technologies that enable cross-p
 | :--- | :---|
 
 
+| Library/Technology | Purpose |
+| :--- | :--- |
 | **Expo** | The core framework for developing, building, and deploying universal React applications. Simplifies setup and tooling. |
 | **React Native** | The foundational framework for building native mobile applications using JavaScript/TypeScript. |
 | **TypeScript** | Provides static type-checking to enhance code quality, catch errors early, and improve developer experience. |
