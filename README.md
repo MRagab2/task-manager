@@ -11,11 +11,6 @@ This application provides a robust set of features to handle personal and profes
   * **Filtering and Sorting:** Sort tasks by creation date, due date, or status. Filter the task list to show only incomplete, overdue, or completed items.
   * **Intuitive UI:** A clean, mobile-first interface designed for effortless use on iOS and Android devices.
 
-### Special Instructions for Use
-
-  * **Offline Mode (Inferred):** Depending on the final implementation, the app is expected to store tasks locally (potentially using AsyncStorage or similar storage) allowing for use even without an active internet connection.
-  * **Touch Interactions:** All main interactions (marking complete, editing, deleting) use common mobile gestures like taps and swipes.
-
 ## 🛠️ Setup and Running Instructions
 
 This project requires [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your system. It is designed to be run using the Expo ecosystem.
@@ -56,10 +51,6 @@ This will launch the Metro Bundler in your browser and display a QR code in your
 # 📦 Third-Party Libraries
 
 The application is built upon a modern stack of technologies that enable cross-platform development and efficient styling.
-
-| Library/Technology | Purpose |
-| :--- | :---|
-
 
 | Library/Technology | Purpose |
 | :--- | :--- |
