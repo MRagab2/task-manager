@@ -1,5 +1,5 @@
 interface TaskItem {
-    id?: number,
+    $id?: number,
     title?: string,
     description?: string,
     check: boolean  
