@@ -1,5 +1,5 @@
 import { icons } from "@/constants/icons";
-import { deleteTask } from "@/services/tasks";
+import { deleteTask, updateTask } from "@/services/tasks";
 import Checkbox from "expo-checkbox";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -21,7 +21,11 @@ const DoneItem = ({
               transform: [{ scale: 1.3 }],
             }}
             value={isChecked}
-            onValueChange={setChecked}
+            onValueChange={async () => {
+                          setChecked;
+                          updateTask({ $id,check: false });
+                          router.push('/');
+                        }}
             color={isChecked ? '#4630EB' : undefined}
           />
 
@@ -44,13 +48,13 @@ const DoneItem = ({
         <View className=" flex-col w-[80%] items-left justify-start h-full">
           <TouchableOpacity>
             <View className="justify-start">
-              <Text className="text-caveat text-white text-4xl font-caveat">
+              <Text className="text-caveat text-light-200 text-4xl font-caveat line-through">
                 {title}
               </Text>
             </View>
 
             <View>
-              <Text className="text-caveat text-white text-2xl my-1 mb-3 font-caveat">
+              <Text className="text-caveat text-light-300 text-2xl my-1 mb-3 font-caveat">
                 {description}
               </Text>
             </View>

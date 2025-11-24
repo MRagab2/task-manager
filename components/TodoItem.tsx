@@ -1,5 +1,5 @@
 import { icons } from "@/constants/icons";
-import { deleteTask } from "@/services/tasks";
+import { deleteTask, updateTask } from "@/services/tasks";
 import Checkbox from "expo-checkbox";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -16,19 +16,23 @@ const TodoItem = ({
       <View className=" flex flex-row m-1 border-white border-solid border-b rounded-3xl relative ml-3">
         <View className="flex flex-col w-[10%] mr-5 justify-between py-3">
           <Checkbox
-          className="flex self-center mb-3"
+            className="flex self-center mb-3"
             style={{
               transform: [{ scale: 1.3 }],
             }}
             value={isChecked}
-            onValueChange={setChecked}
+            onValueChange={async () => {
+              setChecked;
+              updateTask({ $id,check: true });
+              router.push('/');
+            }}
             color={isChecked ? '#4630EB' : undefined}
           />
 
-          <TouchableOpacity className="self-center pb-1" 
-          onPress={async ()=>{
-            await deleteTask($id);
-            router.push('/');
+          <TouchableOpacity className="self-center pb-1"
+            onPress={async () => {
+              await deleteTask($id);
+              router.push('/');
             }}>
             <Image
               source={icons.del}

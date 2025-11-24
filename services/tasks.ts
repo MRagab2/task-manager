@@ -9,7 +9,7 @@ const client = new Client()
     .setEndpoint(ENDPOINT)
     .setProject(PROJECT_ID)
 
-const databases  = new Databases(client);
+const databases = new Databases(client);
 
 export const getUncheckedTasks = async (): Promise<TaskItem[] | undefined> => {
     try {
@@ -17,7 +17,7 @@ export const getUncheckedTasks = async (): Promise<TaskItem[] | undefined> => {
             databaseId: DATABASE_ID,
             collectionId: COLLECTION_ID,
             queries: [
-                Query.equal('check',false)    
+                Query.equal('check', false)
             ]
         });
 
@@ -33,7 +33,7 @@ export const getCheckedTasks = async (): Promise<TaskItem[] | undefined> => {
             databaseId: DATABASE_ID,
             collectionId: COLLECTION_ID,
             queries: [
-                Query.equal('check',true)    
+                Query.equal('check', true)
             ]
         });
 
@@ -44,12 +44,28 @@ export const getCheckedTasks = async (): Promise<TaskItem[] | undefined> => {
     }
 };
 
-export const deleteTask = async(taskId:number) => {
-try {
+export const deleteTask = async (taskId: number) => {
+    try {
         const result = await databases.deleteDocument({
             databaseId: DATABASE_ID,
             collectionId: COLLECTION_ID,
             documentId: taskId,
+        });
+
+        return result || [];
+    } catch (error) {
+        console.error(error);
+        return undefined;
+    }
+};
+
+export const updateTask = async (taskItem: TaskItem) => {
+    try {
+        const result = await databases.updateDocument({
+            databaseId: DATABASE_ID,
+            collectionId: COLLECTION_ID,
+            documentId: taskItem.$id,
+            data: { ...taskItem }
         });
 
         return result || [];
