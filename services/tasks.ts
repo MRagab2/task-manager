@@ -26,7 +26,7 @@ export const getUncheckedTasks = async (): Promise<TaskItem[] | undefined> => {
         console.error(error);
         return undefined;
     }
-}
+};
 export const getCheckedTasks = async (): Promise<TaskItem[] | undefined> => {
     try {
         const result = await databases.listDocuments({
@@ -42,4 +42,19 @@ export const getCheckedTasks = async (): Promise<TaskItem[] | undefined> => {
         console.error(error);
         return undefined;
     }
-}
+};
+
+export const deleteTask = async(taskId:number) => {
+try {
+        const result = await databases.deleteDocument({
+            databaseId: DATABASE_ID,
+            collectionId: COLLECTION_ID,
+            documentId: taskId,
+        });
+
+        return result || [];
+    } catch (error) {
+        console.error(error);
+        return undefined;
+    }
+};

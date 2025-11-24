@@ -1,13 +1,16 @@
 import { icons } from "@/constants/icons";
+import { deleteTask } from "@/services/tasks";
 import Checkbox from "expo-checkbox";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 const TodoItem = ({
-  title, description, check,
+  $id, title, description, check,
 }: TaskItem) => {
 
   const [isChecked, setChecked] = useState(check);
+  const router = useRouter();
   return (
     <View className="flex ">
       <View className=" flex flex-row m-1 border-white border-solid border-b rounded-3xl relative ml-3">
@@ -22,7 +25,11 @@ const TodoItem = ({
             color={isChecked ? '#4630EB' : undefined}
           />
 
-          <TouchableOpacity className="self-center pb-1">
+          <TouchableOpacity className="self-center pb-1" 
+          onPress={async ()=>{
+            await deleteTask($id);
+            router.push('/');
+            }}>
             <Image
               source={icons.del}
               style={{

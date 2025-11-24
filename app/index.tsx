@@ -61,7 +61,7 @@ export default function Index() {
                 <Text className="font-dancing-script text-5xl text-secnodary mb-5">
                   To-Do :
                 </Text>
-                <Link href={''} asChild className="self-center mr-6">
+                <Link href={'/../components/DoneItem'} asChild className="self-center mr-6">
                   <TouchableOpacity>
                     <Image
                       source={icons.addNew}
