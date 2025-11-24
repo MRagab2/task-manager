@@ -47,7 +47,7 @@ const TodoItem = ({
         </View>
 
         <View className=" flex-col w-[80%] items-left justify-start h-full">
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=> router.push(`/taskItem?taskId=${$id?$id:null }`)}>
 
             <View className="justify-start">
               <Text className="text-caveat text-white text-4xl font-caveat">

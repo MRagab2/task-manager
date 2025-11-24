@@ -3,9 +3,9 @@ import TodoItem from "@/components/TodoItem";
 import { icons } from "@/constants/icons";
 import { getCheckedTasks, getUncheckedTasks } from "@/services/tasks";
 import useFetch from "@/services/useFetch";
-import { Link } from "expo-router";
+import { useRouter } from "expo-router";
 import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import "./global.css";
+import "../global.css";
 
 export default function Index() {
 
@@ -21,11 +21,13 @@ export default function Index() {
     loading: checkeTaskItemsLoading,
   } = useFetch(getCheckedTasks);
 
+  const router = useRouter();
+
   return (
     <View className="bg-primary flex-1">
       {/* Header */}
       <View className="justify-center items-center mt-20 mb-10 flex-row">
-        <Text className="font-dancing-script text-8xl text-secnodary w-[55%]">
+        <Text className="font-dancing-script text-8xl text-secondary w-[55%]">
           Taskii
         </Text>
         <Image
@@ -43,37 +45,33 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           minHeight: '100%',
-          // alignItems: 'flex-start',
-          // justifyContent: 'flex-start'
         }}
       >
         <View className="flex flex-col">
 
           {/* Todo Header */}
           <View className="flex-row px-4 justify-between mb-5">
-            <Text className="font-dancing-script text-5xl text-secnodary">
+            <Text className="font-dancing-script text-5xl text-secondary">
               To-Do :
             </Text>
-            <Link href={'/../components/DoneItem'} asChild className="self-center mr-6">
-              <TouchableOpacity>
-                <Image
-                  source={icons.addNew}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    tintColor: '#8ec1fa',
-                    alignSelf: 'flex-end'
-                  }}
-                />
-              </TouchableOpacity>
-            </Link>
+            <TouchableOpacity onPress={() => router.push(`/taskItem?taskId=${0}`)} className="self-center mr-6">
+              <Image
+                source={icons.addNew}
+                style={{
+                  width: 40,
+                  height: 40,
+                  tintColor: '#8ec1fa',
+                  alignSelf: 'flex-end'
+                }}
+              />
+            </TouchableOpacity>
           </View>
 
           {/* Todo Tasks */}
           <FlatList
             data={uncheckeTaskItems ?? []}
             renderItem={({ item }) => (
-              <TodoItem {...item} />
+              <TodoItem {...item}/>
             )}
             keyExtractor={(item) => item.$id.toString()}
             numColumns={1}
@@ -84,7 +82,7 @@ export default function Index() {
 
           {/* Done Header */}
           <View className="flex-1 px-4 mb-5">
-            <Text className="font-dancing-script text-5xl text-secnodary">
+            <Text className="font-dancing-script text-5xl text-secondary">
               Done :
             </Text>
           </View>

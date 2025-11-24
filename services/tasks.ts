@@ -1,4 +1,4 @@
-import { Client, Databases, Query } from "react-native-appwrite";
+import { Client, Databases, ID, Query } from "react-native-appwrite";
 
 const ENDPOINT = process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!;
 const DATABASE_ID = process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!;
@@ -69,6 +69,40 @@ export const updateTask = async (taskItem: TaskItem) => {
         });
 
         return result || [];
+    } catch (error) {
+        console.error(error);
+        return undefined;
+    }
+};
+
+export const getTaskById = async (taskId: number) => {
+    try {
+        const result = await databases.getDocument({
+            databaseId: DATABASE_ID,
+            collectionId: COLLECTION_ID,
+            documentId: taskId,
+        });
+
+        return result;
+    } catch (error) {
+        console.error(error);
+        return undefined;
+    }
+};
+
+export const createTask = async (taskItem: TaskItem) => {
+    try {
+        let result;
+        if (taskItem.title || taskItem.description) {
+            result = await databases.createDocument({
+                databaseId: DATABASE_ID,
+                collectionId: COLLECTION_ID,
+                documentId: ID.unique(),
+                data: { ...taskItem },
+            })
+        }
+
+        return result;
     } catch (error) {
         console.error(error);
         return undefined;
