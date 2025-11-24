@@ -37,70 +37,70 @@ export default function Index() {
           source={icons.logo}
         />
       </View>
+
+      {/* Body */}
       <ScrollView
-        className=""
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           minHeight: '100%',
+          // alignItems: 'flex-start',
+          // justifyContent: 'flex-start'
         }}
       >
-        <FlatList
-          data={uncheckeTaskItems ?? []}
-          renderItem={({ item }) => (
-            <TodoItem {...item} />
-          )}
-          keyExtractor={(item) => item.$id.toString()}
-          numColumns={1}
-          className=""
-          scrollEnabled={false}
-          nestedScrollEnabled={false}
-          contentContainerStyle={{ paddingBottom: 0 }}
-          ListHeaderComponent={() => (
-            <>
-              <View className="flex-row px-4 justify-between">
-                <Text className="font-dancing-script text-5xl text-secnodary mb-5">
-                  To-Do :
-                </Text>
-                <Link href={'/../components/DoneItem'} asChild className="self-center mr-6">
-                  <TouchableOpacity>
-                    <Image
-                      source={icons.addNew}
-                      style={{
-                        width: 40,
-                        height: 40,
-                        tintColor: '#8ec1fa',
-                        alignSelf: 'flex-end'
-                      }}
-                    />
-                  </TouchableOpacity>
-                </Link>
-              </View>
-            </>
-          )}
-        />
-        <FlatList
-          data={checkeTaskItems ?? []}
-          renderItem={({ item }) => (
-            <DoneItem {...item} />
-          )}
-          keyExtractor={(item) => item.$id.toString()}
-          numColumns={1}
-          className="mt-10"
-          scrollEnabled={false}
-          nestedScrollEnabled={false}
-          contentContainerStyle={{ paddingBottom: 120 }}
-          ListHeaderComponent={() => (
-            <>
-              <View className="flex-1 px-4">
-                <Text className="font-dancing-script text-5xl text-secnodary mb-5">
-                  Done :
-                </Text>
+        <View className="flex flex-col">
 
-              </View>
+          {/* Todo Header */}
+          <View className="flex-row px-4 justify-between mb-5">
+            <Text className="font-dancing-script text-5xl text-secnodary">
+              To-Do :
+            </Text>
+            <Link href={'/../components/DoneItem'} asChild className="self-center mr-6">
+              <TouchableOpacity>
+                <Image
+                  source={icons.addNew}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    tintColor: '#8ec1fa',
+                    alignSelf: 'flex-end'
+                  }}
+                />
+              </TouchableOpacity>
+            </Link>
+          </View>
 
-            </>
-          )}
-        />
+          {/* Todo Tasks */}
+          <FlatList
+            data={uncheckeTaskItems ?? []}
+            renderItem={({ item }) => (
+              <TodoItem {...item} />
+            )}
+            keyExtractor={(item) => item.$id.toString()}
+            numColumns={1}
+            className="mb-5"
+            scrollEnabled={false}
+            nestedScrollEnabled={false}
+          />
+
+          {/* Done Header */}
+          <View className="flex-1 px-4 mb-5">
+            <Text className="font-dancing-script text-5xl text-secnodary">
+              Done :
+            </Text>
+          </View>
+
+          {/* Done Tasks */}
+          <FlatList
+            data={checkeTaskItems ?? []}
+            renderItem={({ item }) => (
+              <DoneItem {...item} />
+            )}
+            keyExtractor={(item) => item.$id.toString()}
+            numColumns={1}
+            scrollEnabled={false}
+            nestedScrollEnabled={false}
+          />
+        </View>
       </ScrollView>
 
     </View>
